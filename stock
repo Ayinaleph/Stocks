@@ -1,0 +1,24 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+tickers_list = ['AAPL', 'META','AMZN','GOOGL']
+
+import yfinance as yf
+data = yf.download(tickers_list,'2024-1-1')['Adj Close']
+
+((data.pct_change()+1).cumprod()).plot(figsize=(10, 7))
+plt.legend()
+plt.title("Close Value", fontsize=16)
+
+plt.ylabel('Cumulative Close Value', fontsize=14)
+plt.xlabel('Time', fontsize=14)
+
+plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
+
+
+(yf.download('AAPL','2024-1-1')['Adj Close']).to_csv('AAPL.csv', index=False)
+(yf.download('AMZN','2024-1-1')['Adj Close']).to_csv('AMZN.csv', index=False)
+(yf.download('META','2024-1-1')['Adj Close']).to_csv('META.csv', index=False)
+(yf.download('GOOGL','2024-1-1')['Adj Close']).to_csv('GOOGL.csv', index=False)
+
+plt.show()
